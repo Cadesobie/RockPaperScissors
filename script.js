@@ -12,9 +12,6 @@ function getComputerChoice() {
 
 function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
-    if (!["rock","paper","scissors"].includes(playerSelection)) {
-        return "Please enter rock, paper, or scissors."
-    }
     if (playerSelection == computerSelection) {
         return `It's a tie! You both picked ${playerSelection}.`
     } else if (
@@ -33,6 +30,11 @@ function playRound(playerSelection, computerSelection) {
 function game() {
     for (let i = 1; i<=5; i++) {
         let playerSelection = prompt("Please enter rock, paper, or scissors.",);
+        if (!["rock","paper","scissors"].includes(playerSelection)) {
+           while (!["rock","paper","scissors"].includes(playerSelection)) {
+                playerSelection = prompt("Please enter rock, paper, or scissors.");
+           }
+        }
         const computerSelection = getComputerChoice();
         console.log(playRound(playerSelection, computerSelection));
         console.log(`The score is ${playerScore} (You) - ${computerScore} (Computer)`)
